@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Add Person</h2>
+<mat-dialog-content class="mat-typography" style="display: flex; flex-direction: column;">
+    <mat-form-field *ngIf="data.isNew">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name" required />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Rank</mat-label>
+        <input matInput [(ngModel)]="rank" required />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Duty Title</mat-label>
+        <input matInput [(ngModel)]="duty" required />
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="error" matError>{{error}}</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="addPerson()">Add</button>
+</mat-dialog-actions>

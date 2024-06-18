@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Duty history for {{name}}</h2>
+<mat-dialog-content>
+        <mat-list>
+            <mat-list-item *ngFor="let duty of astronautDuties$ | async; index as i">
+                <mat-icon matListItemIcon>note</mat-icon>
+                <div matListItemTitle>{{duty.dutyTitle}}</div>
+                <div matListItemLine>Rank: {{duty.rank}}</div>
+                <div matListItemLine>{{ duty.dutyStartDate | date: 'MM/dd/yyyy'}} {{ duty.dutyEndDate ? '-' : ''}} {{ duty.dutyEndDate | date: 'MM/dd/yyyy'}}</div>
+            </mat-list-item>
+        </mat-list>
+</mat-dialog-content>

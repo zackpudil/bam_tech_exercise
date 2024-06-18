@@ -1,0 +1,19 @@
+<main class="main">
+  <h3>Astronauts</h3>
+  <div class="astronauts" >
+    <mat-card appearance="outlined" *ngFor="let astro of personAstronauts$ | async; index as i">
+      <mat-card-header>
+        <mat-card-title>{{astro.name}} | {{astro.currentRank}}</mat-card-title>
+      </mat-card-header>
+      <img src="https://robohash.org/{{astro.name}}" />
+      <mat-card-content>
+        {{astro.currentDutyTitle}} ({{astro.careerStartDate | date: 'MM/dd/yyyy'}})
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="viewDutyHistory(astro.name)">View Duty History</button>
+        <button mat-raised-button (click)="addOrUpdate(false, astro.name)">Update Duty</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <button mat-flat-button (click)="addOrUpdate()"> Add Astronaut</button>
+</main>
