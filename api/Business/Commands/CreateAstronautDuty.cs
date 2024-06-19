@@ -43,7 +43,7 @@ namespace StargateAPI.Business.Commands
                 .FirstOrDefault(z => z.DutyTitle == request.DutyTitle && z.DutyStartDate == request.DutyStartDate);
 
             if (verifyNoPreviousDuty is not null) 
-                throw new BadHttpRequestException($"Duty already exists {request.DutyTitle}({request.DutyStartDate})");
+                throw new BadHttpRequestException($"Duty already exists {request.DutyTitle}({request.DutyStartDate})", 400);
 
             return Task.CompletedTask;
         }

@@ -20,31 +20,26 @@ import { AddPersonDialogData } from "../../models/Response";
 })
 export class AddPersonDialogComponent {
     data = inject<AddPersonDialogData>(MAT_DIALOG_DATA);
+
     constructor(private stargateService: StargateService, private dialog: MatDialogRef<AddPersonDialogComponent>) { }
 
     name: string = "";
     rank: string = "";
     duty: string = "";
     startDate: string = "";
-
     error: string = "";
 
     addPerson() {
-        if (this.data.isNew) {
-            this.stargateService
+        const save$ = this.data.isNew 
+            ? this.stargateService
                 .addPerson(this.name)
-                .pipe(
-                    switchMap(() => this.stargateService.addDuty(this.name, this.rank, this.duty, this.startDate))
-                )
-                .subscribe({
-                    complete: () => this.dialog.close(),
-                    error: ({ error }) => this.error = error.message
-                });
-        } else {
-            this.stargateService
-                .addDuty(this.data.existingName, this.rank, this.duty, this.startDate)
-                .subscribe(() => this.dialog.close(), ({ error }) => this.error = error.message);
-        }
-            
+                .pipe(switchMap(() => this.stargateService.addDuty(this.name, this.rank, this.duty, this.startDate))) 
+            : this.stargateService
+                    .addDuty(this.data.existingName, this.rank, this.duty, this.startDate);
+
+        save$.subscribe({
+            complete: () => this.dialog.close(),
+            error: ({ error }) => this.error = error.message
+        });
     }
 }
