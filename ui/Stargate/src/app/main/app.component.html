@@ -14,6 +14,7 @@
         <button mat-raised-button (click)="addOrUpdate(false, astro.name)">Update Duty</button>
       </mat-card-actions>
     </mat-card>
+    <mat-progress-spinner mode="indeterminate" *ngIf="loading"></mat-progress-spinner>
   </div>
   <button mat-flat-button (click)="addOrUpdate(true)"> Add Astronaut</button>
 </main>
