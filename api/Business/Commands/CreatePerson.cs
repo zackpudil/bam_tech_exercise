@@ -22,7 +22,7 @@ namespace StargateAPI.Business.Commands
         {
             var person = _context.People.AsNoTracking().FirstOrDefault(z => z.Name == request.Name);
 
-            if (person is not null) throw new BadHttpRequestException($"Person with name {request.Name} already exists");
+            if (person is not null) throw new BadHttpRequestException($"Person with name {request.Name} already exists", 409);
 
             return Task.CompletedTask;
         }
@@ -31,10 +31,12 @@ namespace StargateAPI.Business.Commands
     public class CreatePersonHandler : IRequestHandler<CreatePerson, CreatePersonResult>
     {
         private readonly StargateContext _context;
+        private readonly ILogger<CreatePersonHandler> _logger;
 
-        public CreatePersonHandler(StargateContext context)
+        public CreatePersonHandler(StargateContext context, ILogger<CreatePersonHandler> logger)
         {
             _context = context;
+            _logger = logger;
         }
         public async Task<CreatePersonResult> Handle(CreatePerson request, CancellationToken cancellationToken)
         {
@@ -47,6 +49,8 @@ namespace StargateAPI.Business.Commands
             await _context.People.AddAsync(newPerson);
 
             await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Created person {newPerson.Name}({newPerson.Id})");
 
             return new CreatePersonResult()
             {

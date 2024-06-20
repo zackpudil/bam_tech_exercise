@@ -24,7 +24,9 @@ namespace StargateAPI.Tests
             var context = new Mock<StargateContext>();
             context.Setup(x => x.People).ReturnsDbSet(data);
 
-            var sut = new CreateAstronautDutyHandler(context.Object);
+            var logger = new Mock<ILogger<CreateAstronautDutyHandler>>();
+
+            var sut = new CreateAstronautDutyHandler(context.Object, logger.Object);
 
 
             await sut.Handle(new CreateAstronautDuty
@@ -73,7 +75,8 @@ namespace StargateAPI.Tests
             var context = new Mock<StargateContext>();
             context.Setup(x => x.People).ReturnsDbSet(data);
 
-            var sut = new CreateAstronautDutyHandler(context.Object);
+            var logger = new Mock<ILogger<CreateAstronautDutyHandler>>();
+            var sut = new CreateAstronautDutyHandler(context.Object, logger.Object);
 
 
             await sut.Handle(new CreateAstronautDuty
@@ -109,7 +112,9 @@ namespace StargateAPI.Tests
             var context = new Mock<StargateContext>();
             context.Setup(x => x.People).ReturnsDbSet(data);
 
-            var sut = new CreateAstronautDutyHandler(context.Object);
+            var logger = new Mock<ILogger<CreateAstronautDutyHandler>>();
+
+            var sut = new CreateAstronautDutyHandler(context.Object, logger.Object);
 
 
             await sut.Handle(new CreateAstronautDuty
@@ -153,7 +158,9 @@ namespace StargateAPI.Tests
             var context = new Mock<StargateContext>();
             context.Setup(x => x.People).ReturnsDbSet(data);
 
-            var sut = new CreateAstronautDutyHandler(context.Object);
+            var logger = new Mock<ILogger<CreateAstronautDutyHandler>>();
+
+            var sut = new CreateAstronautDutyHandler(context.Object, logger.Object);
 
 
             await sut.Handle(new CreateAstronautDuty

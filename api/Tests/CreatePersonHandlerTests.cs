@@ -16,8 +16,8 @@ namespace StargateAPI.Tests
             var people = new Mock<DbSet<Person>>();
             var context = new Mock<StargateContext>();
             context.Setup(x => x.People).Returns(people.Object);
-
-            var sut = new CreatePersonHandler(context.Object);
+            var logger = new Mock<ILogger<CreatePersonHandler>>();
+            var sut = new CreatePersonHandler(context.Object, logger.Object);
 
             await sut.Handle(new CreatePerson
             {

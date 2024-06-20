@@ -5,7 +5,6 @@ namespace StargateAPI.Models
     public class CreatePersonRequest
     {
         [Required]
-        [MinLength(1)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 }

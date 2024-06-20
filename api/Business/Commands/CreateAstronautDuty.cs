@@ -52,10 +52,12 @@ namespace StargateAPI.Business.Commands
     public class CreateAstronautDutyHandler : IRequestHandler<CreateAstronautDuty, CreateAstronautDutyResult>
     {
         private readonly StargateContext _context;
+        private readonly ILogger<CreateAstronautDutyHandler> _logger;
 
-        public CreateAstronautDutyHandler(StargateContext context)
+        public CreateAstronautDutyHandler(StargateContext context, ILogger<CreateAstronautDutyHandler> logger)
         {
             _context = context;
+            _logger = logger;
 
         }
         public async Task<CreateAstronautDutyResult> Handle(CreateAstronautDuty request, CancellationToken cancellationToken)
@@ -65,6 +67,8 @@ namespace StargateAPI.Business.Commands
                 .Include(x => x.AstronautDetail)
                 .Include(x => x.AstronautDuties)
                 .First(p => p.Name == request.Name);
+
+            
 
             if (person.AstronautDetail == null)
             {
@@ -92,6 +96,7 @@ namespace StargateAPI.Business.Commands
 
             if (astronautDuty != null)
             {
+                _logger.LogInformation($"Ending Astronaut duty {astronautDuty.DutyTitle} for {person.Name} ({person.Id})");
                 astronautDuty.DutyEndDate = request.DutyStartDate.AddDays(-1).Date;
             }
 
@@ -107,6 +112,8 @@ namespace StargateAPI.Business.Commands
             person.AstronautDuties.Add(newAstronautDuty);
 
             await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Creating Astronaut duty {person.AstronautDetail.CurrentDutyTitle} for {person.Name} ({person.Id})");
 
             return new CreateAstronautDutyResult()
             {

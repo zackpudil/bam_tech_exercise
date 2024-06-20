@@ -21,7 +21,7 @@ namespace StargateAPI.Controllers
 
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetPeople()
         {
             try

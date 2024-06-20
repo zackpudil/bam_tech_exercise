@@ -8,7 +8,7 @@ namespace StargateAPI.Controllers
     {
         public static IActionResult GetResponse(this ControllerBase controllerBase, BaseResponse response, ILogger<ControllerBase> log)
         {
-            log.Log(!response.Success ? LogLevel.Error : LogLevel.Information, response.Message);
+            log.Log(!response.Success ? LogLevel.Error : LogLevel.Information, $"{controllerBase.Request.Path}: {response.Message}");
             
             var httpResponse = new ObjectResult(response);
             httpResponse.StatusCode = response.ResponseCode;
