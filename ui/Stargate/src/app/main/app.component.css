@@ -1,18 +1,26 @@
-.astronauts {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
-    mat-card {
-        margin: 10px
-    }
-}
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    height: 80%;
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        margin: 15px;
+
+        button {
+            margin-left: 20px;
+        }
+    }
+
+    .astronauts {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        mat-card {
+            margin: 10px;
+        }
+    }
 }

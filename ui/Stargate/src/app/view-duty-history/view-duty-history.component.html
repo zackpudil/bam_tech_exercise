@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Duty history for {{name}}</h2>
 <mat-dialog-content>
+    <img src="https://robohash.org/{{name}}.png" />
     <mat-list>
         <mat-list-item *ngFor="let duty of astronautDuties$ | async; index as i">
             <mat-icon matListItemIcon>note</mat-icon>

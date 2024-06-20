@@ -1,5 +1,8 @@
 <main class="main">
-  <h3>Astronauts</h3>
+  <div class="header">
+    <h3>Astronauts</h3>
+    <button mat-flat-button (click)="addOrUpdate(true)"> Add Astronaut</button>
+  </div>
   <div class="astronauts" >
     <mat-card appearance="outlined" *ngFor="let astro of personAstronauts$ | async; index as i">
       <mat-card-header>
@@ -19,5 +22,4 @@
     </mat-card>
     <mat-progress-spinner mode="indeterminate" *ngIf="loading"></mat-progress-spinner>
   </div>
-  <button mat-flat-button (click)="addOrUpdate(true)"> Add Astronaut</button>
 </main>
