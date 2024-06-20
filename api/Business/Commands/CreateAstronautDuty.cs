@@ -4,7 +4,7 @@ using MediatR.Pipeline;
 using Microsoft.EntityFrameworkCore;
 using StargateAPI.Business.Data;
 using StargateAPI.Business.Queries;
-using StargateAPI.Controllers;
+using StargateAPI.Models;
 using System.Net;
 
 namespace StargateAPI.Business.Commands

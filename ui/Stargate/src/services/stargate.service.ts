@@ -12,7 +12,7 @@ export class StargateService {
     private baseUrl: string;
 
     public constructor(private http: HttpClient) {
-        this.baseUrl = "https://localhost:7204"
+        this.baseUrl = "https://ba92-97-116-64-21.ngrok-free.app"
     }
 
     getAstronauts(): Observable<PersonAstronaut[]> {
@@ -22,12 +22,8 @@ export class StargateService {
     addPerson(name: string): Observable<BaseResponse> {
         return this.http.post<BaseResponse>(
             `${this.baseUrl}/Person`,
-            `"${name}"`,
-            {
-                headers: new HttpHeaders({ 
-                    'Content-Type': 'text/json'
-                })
-            });
+            { name }
+        );
     }
 
     getDuties(name: string): Observable<AstronautDutiesResponse> {

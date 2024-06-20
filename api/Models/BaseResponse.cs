@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace StargateAPI.Controllers
+namespace StargateAPI.Models
 {
     public class BaseResponse
     {

@@ -3,15 +3,18 @@
   <div class="astronauts" >
     <mat-card appearance="outlined" *ngFor="let astro of personAstronauts$ | async; index as i">
       <mat-card-header>
-        <mat-card-title>{{astro.name}} | {{astro.currentRank}}</mat-card-title>
+        <mat-card-title>{{astro.name}} | Rank: {{astro.currentRank}}</mat-card-title>
+        <mat-card-subtitle *ngIf="astro.careerEndDate">Retired {{astro.careerEndDate | date: 'MM/dd/yyyy' }}</mat-card-subtitle>
       </mat-card-header>
       <img src="https://robohash.org/{{astro.name}}" />
       <mat-card-content>
-        {{astro.currentDutyTitle}} ({{astro.careerStartDate | date: 'MM/dd/yyyy'}})
+        <span *ngIf="!astro.careerEndDate">
+          {{astro.currentDutyTitle}} ({{astro.careerStartDate | date: 'MM/dd/yyyy'}})
+        </span>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button (click)="viewDutyHistory(astro.name)">View Duty History</button>
-        <button mat-raised-button (click)="addOrUpdate(false, astro.name)">Update Duty</button>
+        <button [disabled]="astro.careerEndDate" mat-raised-button (click)="addOrUpdate(false, astro.name)">Update Duty</button>
       </mat-card-actions>
     </mat-card>
     <mat-progress-spinner mode="indeterminate" *ngIf="loading"></mat-progress-spinner>
